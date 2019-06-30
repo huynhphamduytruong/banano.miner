@@ -7,13 +7,13 @@ class Api {
 
 	constructor(h) {
 		this.host = h || 'https://powerplant.banano.cc';
-		this.ref = ENUM.REF[url.parse(this.host).hostname];
+		//this.ref = ENUM.REF[url.parse(this.host).hostname];
 	}
 
 	create(address) {
 		return new Request(this.host).options({redirect: false}).form({
 			address: address,
-			ref_uid: this.ref // eslint-disable-line camelcase
+			ref_uid: ""//this.ref // eslint-disable-line camelcase
 		}).post('/index.php').then((res) => {
 			if (res.isStatus(3)) {
 				return true;
@@ -32,7 +32,7 @@ class Api {
 	}
 
 	balance(address) {
-		return new Request(this.host).get(`/stats.php?r=${this.ref}&ref_uid=${this.ref}&address=${address}`).then((res) => {
+		return new Request(this.host).get(`/stats.php?address=${address}`).then((res) => {
 			if (res.isOkay()) {
 				return res.body().toString();
 			}
