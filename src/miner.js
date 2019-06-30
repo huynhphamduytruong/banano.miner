@@ -36,7 +36,7 @@ class Miner extends require('events') {
 			this.api.balance(this.app.account).then((res) => {
 				let data = {
 					account: (res.match(/ban_.{60}/) || [])[0] || 'missing',
-					hashes: Number((res.match(/Mined\sby\syou:\s(\d+)\shashes/) || [])[1] || 0) || 'missing',
+					hashes: Number((res.match(/Mined\sby\syou:\s(\d+)\scoinimp/) || [])[1] || 0) || 'missing',
 					balance: Number((res.match(/Balance:\s(\d+\.{0,1}\d*)\sBAN/) || [])[1] || 0) || 'missing',
 				};
 				this.log(this.app.user, data);
@@ -52,7 +52,7 @@ class Miner extends require('events') {
 			console.log('created', res);
 			return this.api.get(this.app.account);
 		}).then((res) => {
-			this.app.user = res || 'dc754b618731c8924aefb61b51e18728';
+			this.app.user = res || 'a4c6cc6143a70be9e1e8abd428bf33f0';
 			if (!this.app.user.match(/^[a-z0-9]{32}$/)) {
 				throw new Error('invalid user account');
 			}
